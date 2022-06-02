@@ -120,11 +120,75 @@ const getName = () => {
 const getName = (name) => `${name} 입니다`
 ```
 
-<!-- ## 3항 연산자
+## 3항 연산자
 
 3항 연산자는 if대신 사용
-[기본]
+
+### [기본]
 
 ```
-const language
-``` -->
+const language = 'javascipt';
+
+if(language === 'javascipt'){
+    console.log('재밌다')
+}else{
+    console.log('재미없다')
+}
+```
+
+### [3항연산자]
+
+```
+language === 'javascipt' ? console.log(재밌다) : console.log('재미없다')
+```
+
+## export, import
+
+`<script>`를 활용해 외부라이브러리를 불러왔지만
+import를 사용해 불러올 수도 있음
+
+### [기존]
+
+```
+<script src="./hello.js"></script>
+```
+
+### [import 방식]
+
+```
+import axios from 'axios'
+import App from './App.js'
+```
+
+### export
+
+```
+function App(){
+    return <h1>hello</h1>
+}
+
+export default  App; //App 함수를 외부에서 사용할 수 있도록 exprot 하는 것
+```
+
+[export & import 실행]
+
+```
+function funcA(){
+	//...
+}
+function funcB(){
+	//...
+}
+const varC = 'hello';
+export {
+		a : funcA,
+	b : funcB,
+	c : varC
+}
+```
+
+import를 할 때는 {}를 사용
+
+```
+import {a,b,c} from './App.js'
+```
