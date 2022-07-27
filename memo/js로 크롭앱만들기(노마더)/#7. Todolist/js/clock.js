@@ -5,7 +5,7 @@ function getClock() {
     const hours = String(date.getHours()).padStart(2, "0");
     const minutes = String(date.getMinutes()).padStart(2, "0");
     const seconds = String(date.getSeconds()).padStart(2, "0");
-    clock.innerText = `${hours}:${minutes}:${seconds}`;
+    clock.innerText = `${hours}:${minutes}`;
 }
 
 getClock(); //페이지가 실행 되었을 때 바로 실행
