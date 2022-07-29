@@ -11,7 +11,7 @@ function saveToDos() {
 }
 
 function deleteToDo(event) {
-    const li = event.target.parentElement; //클릭한 버튼의 값을 가져옴
+    const li = event.target.parentElement.innerText; //클릭한 버튼의 값을 가져옴
     li.remove(); //클릭한 값을 삭제
     toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
     saveToDos();
