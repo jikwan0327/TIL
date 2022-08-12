@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/TIL.git/static/js/main.3b9a35f2.js",
-    "index.html": "/TIL.git/index.html",
-    "main.3b9a35f2.js.map": "/TIL.git/static/js/main.3b9a35f2.js.map"
+    "main.js": "/TIL/static/js/main.72724134.js",
+    "index.html": "/TIL/index.html",
+    "main.72724134.js.map": "/TIL/static/js/main.72724134.js.map"
   },
   "entrypoints": [
-    "static/js/main.3b9a35f2.js"
+    "static/js/main.72724134.js"
   ]
 }
