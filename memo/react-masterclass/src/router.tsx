@@ -2,7 +2,9 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Coin from "./routes/Coin";
 import Coins from "./routes/Coins";
 
-function Router() {
+interface IRouterProps {}
+
+function Router({}: IRouterProps) {
   return (
     <BrowserRouter>
       <Switch>
@@ -10,7 +12,7 @@ function Router() {
           <Coin />
         </Route>
         <Route path="/">
-          <Coins></Coins>
+          <Coins />
         </Route>
       </Switch>
     </BrowserRouter>
