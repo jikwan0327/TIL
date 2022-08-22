@@ -93,8 +93,8 @@ const logoVariants = {
 };
 
 const navVarients = {
-  top: { backgroundColor: "rgba(0,0,0,1)" },
-  scroll: { backgroundColor: "rgba(0,0,0,0)" },
+  top: { backgroundColor: "rgba(0,0,0,0)" },
+  scroll: { backgroundColor: "rgba(0,0,0,1)" },
 };
 
 function Header() {
@@ -168,6 +168,7 @@ function Header() {
           </motion.svg>
           <Input
             animate={inputAnimation}
+            initial={{ scaleX: 0 }}
             transition={{ type: "linear" }}
             placeholder="Search for movie or tv show..."
           />
