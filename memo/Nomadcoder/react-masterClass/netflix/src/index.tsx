@@ -75,7 +75,7 @@ a {
 }
 `;
 ReactDOM.render(
-  <React.StrictMode>
+  <div>
     <RecoilRoot>
       <QueryClientProvider client={client}>
         <ThemeProvider theme={theme}>
@@ -84,6 +84,6 @@ ReactDOM.render(
         </ThemeProvider>
       </QueryClientProvider>
     </RecoilRoot>
-  </React.StrictMode>,
+  </div>,
   document.getElementById("root")
 );

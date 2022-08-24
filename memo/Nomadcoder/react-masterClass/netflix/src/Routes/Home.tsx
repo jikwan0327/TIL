@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import { motion, AnimatePresence, useViewportScroll } from "framer-motion";
-import { getMovies, IGetMoviesResult } from "../api";
+import { getMovies, getPopularMovies, IGetMoviesResult } from "../api";
 import { makeImagePath } from "../utils";
 import { useState } from "react";
 import { useHistory, useRouteMatch } from "react-router-dom";
@@ -122,6 +122,14 @@ const BigMovie = styled(motion.div)`
   background-color: ${(props) => props.theme.black.lighter};
 `;
 
+const Category = styled.h1`
+  font-size: 40px;
+  color: white;
+  font-weight: 500;
+  position: absolute;
+  top: -50px;
+`;
+
 const rowVarients = {
   hidden: {
     x: window.innerWidth + 5,
@@ -159,13 +167,17 @@ function Home() {
   const history = useHistory();
   const bigMovieMatch = useRouteMatch<{ movieId: string }>("/movies/:movieId");
   const { scrollY } = useViewportScroll();
-  const { isLoading, data } = useQuery<IGetMoviesResult>(["movies", "nowPlaying"], getMovies);
+  const { isLoading: nowLoading, data: nowplaying } = useQuery<IGetMoviesResult>(["movies", "nowPlaying"], getMovies);
+  const { isLoading: popularLoading, data: popular } = useQuery<IGetMoviesResult>(
+    ["movies", "popular"],
+    getPopularMovies
+  );
   const [index, setIndex] = useState(0);
   const increaseIndex = () => {
-    if (data) {
+    if (nowplaying) {
       if (leaving) return;
       toggleLeaving();
-      const total = data?.results.length - 1;
+      const total = nowplaying?.results.length - 1;
       const maxIndex = Math.floor(total / offset) - 1;
       setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
     }
@@ -181,20 +193,22 @@ function Home() {
     history.push("/");
   };
   const clickedMovie =
-    bigMovieMatch?.params.movieId && data?.results.find((movie) => movie.id + "" === bigMovieMatch.params.movieId);
+    bigMovieMatch?.params.movieId &&
+    nowplaying?.results.find((movie) => movie.id + "" === bigMovieMatch.params.movieId);
   console.log(clickedMovie);
   return (
     <Wrapper>
-      {isLoading ? (
+      {nowLoading && popularLoading ? (
         <Loader>Loading...</Loader>
       ) : (
         <>
-          <Banner onClick={increaseIndex} bgPhoto={makeImagePath(data?.results[0].backdrop_path || "")}>
-            <Title>{data?.results[0].title}</Title>
-            <OverView>{data?.results[0].overview}</OverView>
+          <Banner onClick={increaseIndex} bgPhoto={makeImagePath(nowplaying?.results[0].backdrop_path || "")}>
+            <Title>{nowplaying?.results[0].title}</Title>
+            <OverView>{nowplaying?.results[0].overview}</OverView>
           </Banner>
           <Slider>
             <AnimatePresence initial={false} onExitComplete={toggleLeaving}>
+              <Category>Now playing</Category>
               <Row
                 variants={rowVarients}
                 initial="hidden"
@@ -203,7 +217,7 @@ function Home() {
                 transition={{ type: "tween", duration: 1 }}
                 key={index}
               >
-                {data?.results
+                {nowplaying?.results
                   .slice(1)
                   .slice(offset * index, offset * index + offset)
                   .map((movie) => (
@@ -223,6 +237,7 @@ function Home() {
                     </Box>
                   ))}
               </Row>
+              <Category style={{ top: 250 }}>Popular</Category>
             </AnimatePresence>
           </Slider>
           <AnimatePresence>

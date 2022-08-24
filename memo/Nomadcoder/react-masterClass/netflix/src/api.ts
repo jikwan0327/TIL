@@ -45,7 +45,7 @@ export interface IGetTvResult {
 
 export interface IGetSearchResult {
   page: number;
-  results: ITv[];
+  results: ISearch[];
   total_pages: number;
   total_results: number;
 }
@@ -54,10 +54,18 @@ export function getMovies() {
   return fetch(`${BASE_PATH}/movie/now_playing?api_key=${API_KEY}&page=1`).then((res) => res.json());
 }
 
+export function getPopularMovies() {
+  return fetch(`${BASE_PATH}/movie/popular?api_key=${API_KEY}&page=1`).then((res) => res.json());
+}
+
 export function getTv() {
   return fetch(`${BASE_PATH}/tv/popular?api_key=${API_KEY}`).then((res) => res.json());
 }
 
-export function searchAnything() {
-  return fetch(`${BASE_PATH}/search/keyword?api_key=${API_KEY}&page=1`).then((res) => res.json());
+export function searchAnything(search: string) {
+  return fetch(`${BASE_PATH}/search/keyword?api_key=${API_KEY}&query=${search}&page=1`).then((res) => res.json());
+}
+
+export function searchItem(name: string, id: number) {
+  return id;
 }
