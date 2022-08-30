@@ -2,7 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { IGetSearchResult, searchAnything, searchItem } from "../api";
+import { IGetSearchResult, searchAnything } from "../api";
+import { makeImagePath } from "../utils";
+import { motion, AnimatePresence, useViewportScroll } from "framer-motion";
 
 const Grid = styled.div`
   margin-top: 150px;
@@ -12,11 +14,27 @@ const Grid = styled.div`
   gap: 10px;
 `;
 
-const Box = styled.div`
-  background-color: red;
+const Box = styled(motion.div)<{ bgPhoto: string }>`
+  background-image: url(${(props) => props.bgPhoto});
+  background-color: black;
   width: 100%;
   height: 230px;
+  background-size: cover;
+  background-position: center center;
 `;
+
+const BoxVarients = {
+  initial: {
+    scale: 1,
+  },
+  hover: {
+    scale: 1.2,
+    duration: 0.3,
+  },
+  exit: {
+    transition: { delay: 0.5, type: "tween", duration: 0.1 },
+  },
+};
 
 function Search() {
   const location = useLocation();
@@ -27,13 +45,17 @@ function Search() {
   );
   const Id = resultData?.results;
   console.log(Id);
-
   return (
     <Grid>
       {resultData?.results.map((search) => (
-        <Box>
+        <Box
+          variants={BoxVarients}
+          initial="initial"
+          whileHover="hover"
+          key={search.id}
+          bgPhoto={makeImagePath(search.backdrop_path, "w500")}
+        >
           {search.name}
-          <>{search.id}</>
         </Box>
       ))}
     </Grid>

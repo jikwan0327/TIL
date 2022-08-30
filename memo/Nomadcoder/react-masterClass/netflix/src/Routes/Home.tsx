@@ -226,7 +226,7 @@ function Home() {
                       transition={{ type: "tween" }}
                       variants={boxVarients}
                       initial="normal"
-                      whileHover="hover"
+                      whileHover="hover"  
                       onClick={() => onBoxClicked(movie.id)}
                       key={movie.id}
                       bgPhoto={makeImagePath(movie.backdrop_path, "w500")}

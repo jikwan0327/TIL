@@ -20,6 +20,9 @@ interface ITv {
 interface ISearch {
   id: number;
   name: string;
+  backdrop_path: string;
+  poster_path: string;
+  profile_path: string;
 }
 export interface IGetMoviesResult {
   datas: {
@@ -63,9 +66,5 @@ export function getTv() {
 }
 
 export function searchAnything(search: string) {
-  return fetch(`${BASE_PATH}/search/keyword?api_key=${API_KEY}&query=${search}&page=1`).then((res) => res.json());
-}
-
-export function searchItem(name: string, id: number) {
-  return id;
+  return fetch(`${BASE_PATH}/search/multi?api_key=${API_KEY}&query=${search}&page=1`).then((res) => res.json());
 }
