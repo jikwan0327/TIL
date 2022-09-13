@@ -1,0 +1,30 @@
+{
+  "name": "practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack"
+  },
+  "author": "jikwan0327",
+  "license": "ISC",
+  "dependencies": {
+    "@types/react": "^18.0.19",
+    "@types/react-dom": "^18.0.6",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.8.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.7",
+    "@types/webpack": "^5.28.0",
+    "babel-loader": "^8.2.5",
+    "fork-ts-checker-webpack-plugin": "^7.2.13",
+    "react-refresh": "^0.14.0",
+    "ts-loader": "^8.4.0",
+    "ts-node": "^10.9.1",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0"
+  }
+}
