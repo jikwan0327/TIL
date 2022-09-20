@@ -1,5 +1,7 @@
-const API_KEY = "e7bb68f26ed74c593e3f280018ea2c4b";
-const BASE_PATH = "https://api.themoviedb.org/3";
+import axios from "axios";
+
+const API_KEY = process.env.REACT_APP_API_KEY;
+const BASE_PATH = process.env.REACT_APP_BASE_PATH;
 
 interface IMovie {
   id: number;
